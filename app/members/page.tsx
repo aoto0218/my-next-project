@@ -1,3 +1,6 @@
+import Image from "next/image";
+import styles from "./page.module.css";
+
 const data={
     contents:[
         {
@@ -16,11 +19,11 @@ const data={
             id:"2",
             image:{
                 url:"/img-member2.jpg",
-                wiedth:240,
+                width:240,
                 height:240,
             },
             name:"エミリー・サンダース",
-            position:"COO"
+            position:"COO",
             profile:
                 "グローバル企業での運営管理と組織改革の経験豊富なエグゼクティブ。以前は製造業界でCOOとして勤務し。生産性の向上や品質管理の最適化に成功。戦略的なマインドセットと組織の能力強化に対する専門知識は、会社の成長と効率化に大きく貢献している。",
         },
@@ -41,8 +44,29 @@ const data={
 
 export default function Page(){
     return(
-        <div style={{mrgin:20}}>
-            <h1>メンバーページ</h1>
+        <div className={styles.container}>
+            {data.contents.length===0?(
+                <p className={styles.empty}>メンバーが登録されていません。</p>
+            ):(
+                <ul>
+                    {data.contents.map((member)=>(
+                        <li key={member.id} className={styles.list}>
+                            <Image
+                                src={member.image.url}
+                                alt=""
+                                width={member.image.width}
+                                height={member.image.height}
+                                className={styles.image}
+                            />
+                            <dl>
+                                <dt className={styles.name}>{member.name}</dt>
+                                <dd className={styles.position}>{member.position}</dd>
+                                <dd className={styles.profile}>{member.profile}</dd>
+                            </dl>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
-    )
+    );
 }

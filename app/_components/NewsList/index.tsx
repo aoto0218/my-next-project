@@ -4,17 +4,7 @@ import Link from "next/link";
 import styles from "./index.module.css";
 import Category from "../Category";
 import Date from "../Date";
-import type{ News } from "@/app/_libs/microcms";
-
-type News={
-    id:string;
-    title:string;
-    category:{
-        name:string;
-    };
-    publishedAt:string;
-    createdAt:string;
-};
+import {News} from "@/app/_libs/microcms";
 
 type Props={
     news:News[];
